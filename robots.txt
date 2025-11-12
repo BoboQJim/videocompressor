@@ -1,0 +1,20 @@
+# robots.txt for VideoCompress Pro
+# https://video.squoosh.online/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and internal paths (if they exist)
+Disallow: /admin/
+Disallow: /internal/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://video.squoosh.online/sitemap.xml
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+
+# Block search engines from indexing modal content (duplicate of main content)
+Disallow: /*?modal=*

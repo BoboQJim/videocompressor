@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="PLACEHOLDER_FOR_YOUR_VERIFICATION_CODE">
+    <meta name="description" content="Compress video files online for free - No login required. Reduce video size without losing quality for web, social media, and more.">
+    <meta name="keywords" content="video compressor, compress video, reduce video size, online video compression, free video compressor">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Video Compress Pro">
+    <meta property="og:title" content="Free Online Video Compressor - No Login Required">
+    <meta property="og:description" content="Compress MP4, MOV, AVI and other video formats quickly. Reduce file size for easy sharing and storage.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://squoosh.online">
+    <meta property="og:image" content="https://squoosh.online/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Video Compressor - No Login Required">
+    <meta name="twitter:description" content="Compress video files without losing quality. No registration needed.">
+    <title>Free Online Video Compressor - Reduce Video Size Without Quality Loss</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .btn-hover {
+                @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+            }
+            .btn-disabled {
+                @apply opacity-50 cursor-not-allowed hover:shadow-none hover:-translate-y-0;
+            }
+            .upload-complete-badge {
+                @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800;
+            }
+            .progress-bar {
+                @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+            }
+            .progress-fill {
+                @apply h-full transition-all duration-300 ease-in-out;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-inter bg-gray-50 text-dark min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-file-video-o text-primary text-2xl"></i>
+                <span class="text-xl font-bold text-primary">VideoCompress Pro</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#features" class="text-gray-700 hover:text-primary transition-colors text-sm font-medium">Features</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors text-sm font-medium" onclick="openModal('faqModal')">FAQ</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors text-sm font-medium" onclick="openModal('privacyModal')">Privacy</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors text-sm font-medium" onclick="openModal('termsModal')">Terms</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors text-sm font-medium" onclick="openModal('cookieModal')">Cookies</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="py-12 bg-gradient-to-b from-white to-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col items-center justify-center">
+                    <h1 class="text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-gray-900 mb-2 text-center">
+                        Free Online Video Compressor
+                    </h1>
+                    <p class="text-gray-600 mb-8 text-center max-w-2xl">
+                        Reduce file size without losing quality. No login required. Supports MP4, MOV, AVI, and all major formats.
+                    </p>
+                    
+                    <!-- Compression Tool (Central Focus) -->
+                    <div class="relative mb-12 w-full max-w-3xl">
+                        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                            <!-- Dropzone -->
+                            <div id="dropzone" class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-primary transition-colors cursor-pointer mb-6">
+                                <input type="file" id="videoInput" accept="video/*" class="hidden">
+                                <i class="fa fa-cloud-upload text-4xl text-primary mb-4"></i>
+                                <h3 class="text-lg font-medium mb-2">Drag & Drop Video File</h3>
+                                <p class="text-gray-500 mb-4">or click to browse files</p>
+                                <button id="selectFileBtn" class="px-6 py-2 bg-primary text-white rounded-lg btn-hover">
+                                    Select Video File
+                                </button>
+                                <div class="text-xs text-gray-400 mt-4">
+                                    Supports MP4, MOV, AVI, WMV, FLV, MKV (max 500MB)
+                                </div>
+                            </div>
+
+                            <!-- File Information Area -->
+                            <div id="fileInfo" class="hidden mb-6 p-4 border border-gray-200 rounded-lg">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                    <div class="flex items-center mb-3 md:mb-0">
+                                        <i class="fa fa-file-video-o text-primary text-xl mr-3"></i>
+                                        <div>
+                                            <p id="fileName" class="font-medium text-gray-800">filename.mp4</p>
+                                            <p id="fileSize" class="text-sm text-gray-500">File Size: 0 MB</p>
+                                        </div>
+                                    </div>
+                                    <button id="removeFileBtn" class="text-red-500 hover:text-red-700 btn-hover">
+                                        <i class="fa fa-times mr-1"></i> Remove File
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Compression Options Area -->
+                            <div id="compressOptions" class="hidden mb-6">
+                                <h3 class="text-lg font-medium text-gray-700 mb-4">Compression Settings</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Compression Quality</label>
+                                        <select id="qualitySelect" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                            <option value="high">High Quality (≈30% Compression)</option>
+                                            <option value="medium" selected>Medium Quality (≈50% Compression)</option>
+                                            <option value="low">Low Quality (≈70% Compression)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Output Format</label>
+                                        <select id="formatSelect" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                            <option value="mp4" selected>MP4 (Recommended)</option>
+                                            <option value="webm">WebM</option>
+                                            <option value="mov">MOV</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Compression button -->
+                            <button id="compressBtn" class="hidden w-full py-3 bg-primary text-white rounded-lg font-medium btn-hover mb-6">
+                                <i class="fa fa-compress mr-2"></i> Compress Video
+                            </button>
+
+                            <!-- Compress progress area -->
+                            <div id="compressionProgress" class="hidden mb-6">
+                                <div class="flex justify-between items-center mb-2">
+                                    <p id="compressionStatus" class="text-gray-700">Processing video...</p>
+                                    <p id="progressPercent" class="text-gray-500">0%</p>
+                                </div>
+                                <div class="progress-bar mb-6">
+                                    <div id="compressProgressBar" class="progress-fill bg-primary" style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-center">
+                                    <button id="cancelCompressBtn" class="py-2 px-6 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 btn-hover">
+                                        <i class="fa fa-times mr-1"></i> Cancel Compression
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Compressed completion result area -->
+                            <div id="completionResult" class="hidden mt-6 text-center">
+                                <div class="mb-4">
+                                    <i class="fa fa-check-circle text-4xl text-green-500 mb-3"></i>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2">Compression Complete!</h3>
+                                    <div class="flex justify-center space-x-8 mt-4">
+                                        <div>
+                                            <p class="text-sm text-gray-500">Original Size</p>
+                                            <p id="originalSizeDisplay" class="text-lg font-medium text-gray-800">0 MB</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-500">Compressed Size</p>
+                                            <p id="compressedSizeDisplay" class="text-lg font-medium text-green-600">0 MB</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Download link -->
+                                <a id="downloadLink" href="#" class="inline-flex items-center justify-center w-full py-3 bg-secondary text-white rounded-lg btn-hover" download>
+                                    <i class="fa fa-download mr-2"></i> Download Compressed Video
+                                </a>
+                                
+                                <!-- Play test button -->
+                                <button id="testPlayBtn" class="mt-3 w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 btn-hover">
+                                    <i class="fa fa-play mr-1"></i> Test Playback
+                                </button>
+                                
+                                <!-- Hidden video player -->
+                                <video id="testPlayer" class="hidden mt-4 w-full rounded-lg" controls></video>
+
+                                <!-- Compress another button -->
+                                <button id="compressAnotherBtn" class="mt-4 w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 btn-hover">
+                                    <i class="fa fa-refresh mr-1"></i> Compress Another Video
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Decorative Elements -->
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary/10 rounded-full blur-xl hidden md:block"></div>
+                        <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-accent/10 rounded-full blur-xl hidden md:block"></div>
+                    </div>
+                    
+                    <!-- Key Benefits (Simplified) -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 w-full max-w-2xl">
+                        <div class="flex flex-col items-center text-center p-3">
+                            <i class="fa fa-check-circle text-secondary text-xl mb-2"></i>
+                            <span class="text-sm font-medium text-gray-700">No Login</span>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-3">
+                            <i class="fa fa-bolt text-primary text-xl mb-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Fast</span>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-3">
+                            <i class="fa fa-lock text-green-600 text-xl mb-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Secure</span>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-3">
+                            <i class="fa fa-water text-blue-500 text-xl mb-2"></i>
+                            <span class="text-sm font-medium text-gray-700">No Mark</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Use Our Video Compressor</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Powerful features designed to make video compression simple and effective</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <div class="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow flex items-start">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-0 mr-3 flex-shrink-0">
+                            <i class="fa fa-bolt text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Fast Compression</h3>
+                            <p class="text-gray-600 text-sm">Process videos in seconds with our advanced algorithm</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow flex items-start">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-0 mr-3 flex-shrink-0">
+                            <i class="fa fa-lock text-secondary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Secure Processing</h3>
+                            <p class="text-gray-600 text-sm">Files deleted after 24 hours. All transfers encrypted</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow flex items-start">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-0 mr-3 flex-shrink-0">
+                            <i class="fa fa-desktop text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Cross-Platform</h3>
+                            <p class="text-gray-600 text-sm">Works on any device with a modern browser</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow flex items-start">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mb-0 mr-3 flex-shrink-0">
+                            <i class="fa fa-file-video-o text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Format Support</h3>
+                            <p class="text-gray-600 text-sm">Supports MP4, MOV, AVI, WMV, FLV, MKV and more</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow flex items-start">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-0 mr-3 flex-shrink-0">
+                            <i class="fa fa-sliders text-red-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Customizable</h3>
+                            <p class="text-gray-600 text-sm">Adjust quality, resolution and bitrate settings</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow flex items-start">
+                        <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-0 mr-3 flex-shrink-0">
+                            <i class="fa fa-check-circle text-indigo-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">No Watermarks</h3>
+                            <p class="text-gray-600 text-sm">Compressed videos are free of any watermarks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fa fa-file-video-o text-primary text-2xl"></i>
+                        <span class="text-xl font-bold text-primary">VideoCompress Pro</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Free online video compression tool that helps you reduce video file size without losing quality.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-primary">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#features" class="hover:text-black transition-colors">Features</a></li>
+                        <li><a href="#" onclick="openModal('faqModal')" class="hover:text-black transition-colors">FAQ</a></li>
+                        <li><a href="#" onclick="openModal('privacyModal')" class="hover:text-black transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" onclick="openModal('termsModal')" class="hover:text-black transition-colors">Terms of Service</a></li>
+                        <li><a href="#" onclick="openModal('cookieModal')" class="hover:text-black transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
+                &copy; 2025 VideoCompress Pro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAQ Modal -->
+    <div id="faqModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Frequently Asked Questions</h3>
+                    <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="faq-item mb-6">
+                    <h4 class="text-lg font-semibold mb-2">What video formats do you support?</h4>
+                    <p class="text-gray-700">
+                        We support all major video formats including MP4, MOV, AVI, WMV, FLV, MKV, and more. If you encounter any issues with a specific format, please contact our support team.
+                    </p>
+                </div>
+                
+                <div class="faq-item mb-6">
+                    <h4 class="text-lg font-semibold mb-2">What is the maximum file size I can upload?</h4>
+                    <p class="text-gray-700">
+                        Currently, the maximum file size for uploads is 500MB. If you need to compress larger files, please contact us for alternative solutions.
+                    </p>
+                </div>
+                
+                <div class="faq-item mb-6">
+                    <h4 class="text-lg font-semibold mb-2">Will my video quality be affected?</h4>
+                    <p class="text-gray-700">
+                        Our advanced compression algorithm reduces file size while maintaining the highest possible quality. You can choose from three compression levels (High Quality, Balanced, Small Size) to find the perfect balance for your needs.
+                    </p>
+                </div>
+                
+                <div class="faq-item mb-6">
+                    <h4 class="text-lg font-semibold mb-2">How long does compression take?</h4>
+                    <p class="text-gray-700">
+                        Compression time depends on the size of your video and the compression settings you choose. Most videos are compressed within 1-5 minutes. Larger files may take longer.
+                    </p>
+                </div>
+                
+                <div class="faq-item mb-6">
+                    <h4 class="text-lg font-semibold mb-2">Is my video secure?</h4>
+                    <p class="text-gray-700">
+                        Yes, we take your privacy seriously. All video files are encrypted during transfer and stored securely. We automatically delete all uploaded and compressed videos from our servers after 24 hours.
+                    </p>
+                </div>
+                
+                <div class="faq-item mb-6">
+                    <h4 class="text-lg font-semibold mb-2">Can I use the compressed videos for commercial purposes?</h4>
+                    <p class="text-gray-700">
+                        Yes, you can use the compressed videos for both personal and commercial purposes, provided you own the necessary rights to the original video content.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4 class="text-lg font-semibold mb-2">Do you add watermarks to compressed videos?</h4>
+                    <p class="text-gray-700">
+                        No, we do not add any watermarks to your compressed videos. The output video will be exactly like your original, just with a smaller file size.
+                    </p>
+                </div>
+            </div>
+            <div class="p-6 border-t flex justify-end">
+                <button onclick="closeAllModals()" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg btn-hover">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Privacy Policy</h3>
+                    <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg font-semibold mb-3">1. Introduction</h4>
+                <p class="text-gray-700 mb-4">
+                    VideoCompress Pro ("we", "us", or "our") operates the https://video.squoosh.online website (the "Service"). This Privacy Policy explains how we collect, use, disclose, and protect your information when you use our Service. By using the Service, you agree to the collection and use of information in accordance with this policy.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">2. Information We Collect</h4>
+                <p class="text-gray-700 mb-3">
+                    When you use our Service, we may collect the following types of information:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li><strong>Video Files:</strong> Video files you upload for compression. These files are processed locally in your browser where possible and temporarily stored on our servers only for the purpose of compression.</li>
+                    <li><strong>Technical Information:</strong> Automatically collected information including your IP address, browser type and version, operating system, referral URLs, device information, and usage data (such as which features you use and how you interact with the Service).</li>
+                    <li><strong>Cookie Information:</strong> Information collected through cookies and similar tracking technologies (see our Cookie Policy for more details).</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-3">3. How We Use Your Information</h4>
+                <p class="text-gray-700 mb-3">
+                    We use the collected information for the following purposes:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>To provide and maintain our Service</li>
+                    <li>To process and compress your video files</li>
+                    <li>To improve, personalize, and expand our Service</li>
+                    <li>To understand and analyze how you use our Service</li>
+                    <li>To develop new features, services, and functionality</li>
+                    <li>To monitor the usage of our Service</li>
+                    <li>To detect, prevent, and address technical issues</li>
+                    <li>To provide customer support</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-3">4. Data Retention</h4>
+                <p class="text-gray-700 mb-4">
+                    We retain your video files only for as long as necessary to provide the compression service. All uploaded and compressed video files are automatically deleted from our servers within 24 hours of upload. Technical information and usage data may be retained for a longer period for analytical purposes, but will be anonymized where possible.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">5. Data Security</h4>
+                <p class="text-gray-700 mb-4">
+                    We implement appropriate technical and organizational measures to protect your information from unauthorized access, use, disclosure, alteration, or destruction. These measures include encryption of data in transit and at rest, secure server infrastructure, access controls, and regular security audits. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">6. Disclosure of Your Information</h4>
+                <p class="text-gray-700 mb-3">
+                    We will not disclose your personal information to third parties except in the following circumstances:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>With your explicit consent</li>
+                    <li>To comply with legal obligations (e.g., to respond to a subpoena or court order)</li>
+                    <li>To protect and defend our rights and property</li>
+                    <li>To prevent or investigate possible wrongdoing in connection with the Service</li>
+                    <li>To protect the personal safety of users of the Service or the public</li>
+                    <li>To our trusted service providers who assist us in operating the Service, provided they agree to keep this information confidential</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-3">7. Third-Party Services</h4>
+                <p class="text-gray-700 mb-4">
+                    Our Service may contain links to third-party websites or services that are not owned or controlled by us. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You acknowledge and agree that we shall not be liable for any loss or damage caused by your use of any third-party websites or services.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">8. Children's Privacy</h4>
+                <p class="text-gray-700 mb-4">
+                    Our Service is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13 without verification of parental consent, we will take steps to remove that information from our servers.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">9. Your Data Protection Rights</h4>
+                <p class="text-gray-700 mb-3">
+                    Depending on your country of residence, you may have the following data protection rights:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>The right to access, update, or delete the information we have about you</li>
+                    <li>The right to data portability</li>
+                    <li>The right to object to or restrict certain processing</li>
+                    <li>The right to withdraw consent at any time (where processing is based on consent)</li>
+                </ul>
+                <p class="text-gray-700 mb-4">
+                    To exercise these rights, please contact us at support@videocompresspro.com. We will respond to your request within a reasonable timeframe.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">10. Changes to This Privacy Policy</h4>
+                <p class="text-gray-700 mb-4">
+                    We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the bottom of this policy. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">11. Contact Us</h4>
+                <p class="text-gray-700">
+                    If you have any questions about this Privacy Policy, please contact us at:
+                </p>
+                <p class="text-gray-700 mt-2">
+                    Email: support@videocompresspro.com<br>
+                    Website: https://video.squoosh.online
+                </p>
+                
+                <div class="mt-6 pt-6 border-t text-sm text-gray-500">
+                    Last Updated: November 12, 2025
+                </div>
+            </div>
+            <div class="p-6 border-t flex justify-end">
+                <button onclick="closeAllModals()" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg btn-hover">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Terms of Service</h3>
+                    <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg font-semibold mb-3">1. Acceptance of Terms</h4>
+                <p class="text-gray-700 mb-4">
+                    By accessing or using the VideoCompress Pro website and services ("Service"), you agree to be bound by these Terms of Service ("Terms") and our Privacy Policy. If you do not agree to these Terms, you may not use the Service.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">2. Description of Service</h4>
+                <p class="text-gray-700 mb-4">
+                    VideoCompress Pro provides an online video compression service that allows users to upload video files, compress them according to selected settings, and download the compressed files. The Service is provided on an "as is" and "as available" basis.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">3. Eligibility</h4>
+                <p class="text-gray-700 mb-4">
+                    You must be at least 13 years of age to use the Service. By using the Service, you represent and warrant that you are 13 years of age or older and have the legal capacity to enter into these Terms.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">4. User Responsibilities</h4>
+                <p class="text-gray-700 mb-3">
+                    When using the Service, you agree to:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>Only upload video files that you own or have the legal right to use</li>
+                    <li>Not upload any video files that are illegal, infringing, obscene, defamatory, or violate any third-party rights</li>
+                    <li>Not use the Service for any illegal or unauthorized purpose</li>
+                    <li>Comply with all applicable laws and regulations</li>
+                    <li>Not exceed the maximum file size limit (500MB per file)</li>
+                    <li>Not use the Service in a way that could damage, disable, overburden, or impair our servers</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-3">5. Intellectual Property</h4>
+                <p class="text-gray-700 mb-4">
+                    The Service and its original content, features, and functionality are owned by VideoCompress Pro and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws. You retain all rights to your video files. We do not claim any ownership rights to your video files.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">6. Limitation of Liability</h4>
+                <p class="text-gray-700 mb-4">
+                    In no event shall VideoCompress Pro, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your use or inability to use the Service; (ii) any unauthorized access to or use of our servers and/or any personal information stored therein; (iii) any interruption or cessation of transmission to or from the Service; (iv) any bugs, viruses, trojan horses, or the like that may be transmitted to or through our Service by any third party; (v) any errors or omissions in any content or for any loss or damage incurred as a result of the use of any content posted, emailed, transmitted, or otherwise made available through the Service; and/or (vi) the compression quality of video files or any issues with downloaded files.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">7. Disclaimer of Warranties</h4>
+                <p class="text-gray-700 mb-4">
+                    The Service is provided without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Service will be uninterrupted or error-free, that defects will be corrected, or that the Service or the servers that make it available are free of viruses or other harmful components.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">8. Modifications to Service</h4>
+                <p class="text-gray-700 mb-4">
+                    We reserve the right to modify or discontinue the Service (or any part thereof) at any time without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuance of the Service.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">9. Changes to Terms</h4>
+                <p class="text-gray-700 mb-4">
+                    We may update these Terms from time to time. We will notify you of any changes by posting the new Terms on this page and updating the "Last Updated" date. Your continued use of the Service after such changes constitutes your acceptance of the new Terms.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">10. Termination</h4>
+                <p class="text-gray-700 mb-4">
+                    We may terminate or suspend your access to the Service immediately, without prior notice or liability, for any reason whatsoever, including but not limited to if you breach these Terms. Upon termination, your right to use the Service will immediately cease.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">11. Governing Law</h4>
+                <p class="text-gray-700 mb-4">
+                    These Terms shall be governed and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">12. Contact Us</h4>
+                <p class="text-gray-700">
+                    If you have any questions about these Terms of Service, please contact us at:
+                </p>
+                <p class="text-gray-700 mt-2">
+                    Email: support@videocompresspro.com<br>
+                    Website: https://video.squoosh.online
+                </p>
+                
+                <div class="mt-6 pt-6 border-t text-sm text-gray-500">
+                    Last Updated: November 12, 2025
+                </div>
+            </div>
+            <div class="p-6 border-t flex justify-end">
+                <button onclick="closeAllModals()" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg btn-hover">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="cookieModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Cookie Policy</h3>
+                    <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg font-semibold mb-3">1. What Are Cookies</h4>
+                <p class="text-gray-700 mb-4">
+                    Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently, as well as to provide information to the website owners.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">2. Types of Cookies We Use</h4>
+                <p class="text-gray-700 mb-3">
+                    We use the following types of cookies on our Service:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>
+                        <strong>Necessary Cookies:</strong> These cookies are essential for the Service to function properly. They enable basic functions like page navigation and access to secure areas of the Service. Without these cookies, the Service cannot be used as intended.
+                    </li>
+                    <li>
+                        <strong>Analytical/Performance Cookies:</strong> These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our Service. They help us to know which pages are the most and least popular and see how visitors move around the Service.
+                    </li>
+                    <li>
+                        <strong>Functional Cookies:</strong> These cookies enable the Service to provide enhanced functionality and personalization. They may be set by us or by third-party providers whose services we have added to our pages.
+                    </li>
+                    <li>
+                        <strong>Targeting/Advertising Cookies:</strong> These cookies may be set through our Service by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant advertisements on other websites.
+                    </li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-3">3. How We Use Cookies</h4>
+                <p class="text-gray-700 mb-4">
+                    We use cookies for the following purposes:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>To provide and maintain our Service</li>
+                    <li>To improve and personalize the Service</li>
+                    <li>To analyze how users interact with the Service</li>
+                    <li>To remember your preferences and settings</li>
+                    <li>To deliver targeted advertising (with your consent)</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-3">4. Third-Party Cookies</h4>
+                <p class="text-gray-700 mb-4">
+                    Our Service may use third-party cookies from service providers such as Google Analytics for analytical purposes. These third parties have their own cookie policies and we do not have control over their cookies. We recommend that you review the privacy policies of these third-party providers.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">5. Cookie Consent</h4>
+                <p class="text-gray-700 mb-4">
+                    By using our Service, you consent to the use of cookies in accordance with this Cookie Policy. When you first visit our website, we will display a cookie consent banner asking for your permission to use non-necessary cookies. You can withdraw or modify your consent at any time through the cookie settings.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">6. Managing Cookies</h4>
+                <p class="text-gray-700 mb-3">
+                    You can control and manage cookies in your browser settings. Most browsers allow you to:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-4">
+                    <li>See which cookies are stored on your device</li>
+                    <li>Block or delete cookies</li>
+                    <li>Prevent cookies from being stored in the future</li>
+                </ul>
+                <p class="text-gray-700 mb-4">
+                    Please note that disabling certain types of cookies may affect the functionality of our Service. For more information on how to manage cookies in your specific browser, please refer to your browser's help documentation.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">7. Cookie Retention Period</h4>
+                <p class="text-gray-700 mb-4">
+                    Most cookies we use have a limited retention period and will expire after a certain period of time. Session cookies are deleted when you close your browser, while persistent cookies remain on your device for a longer period (usually 1-2 years) or until you delete them.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">8. Changes to This Cookie Policy</h4>
+                <p class="text-gray-700 mb-4">
+                    We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last Updated" date. Your continued use of the Service after such changes constitutes your acceptance of the new Cookie Policy.
+                </p>
+                
+                <h4 class="text-lg font-semibold mb-3">9. Contact Us</h4>
+                <p class="text-gray-700">
+                    If you have any questions about this Cookie Policy, please contact us at:
+                </p>
+                <p class="text-gray-700 mt-2">
+                    Email: support@videocompresspro.com<br>
+                    Website: https://video.squoosh.online
+                </p>
+                
+                <div class="mt-6 pt-6 border-t text-sm text-gray-500">
+                    Last Updated: November 12, 2025
+                </div>
+            </div>
+            <div class="p-6 border-t flex justify-end">
+                <button onclick="closeAllModals()" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg btn-hover">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookieSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Cookie Settings</h3>
+                    <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <p class="text-gray-700 mb-6">
+                    Customize which types of cookies you want to allow on our website. Necessary cookies are required for the website to function properly and cannot be disabled.
+                </p>
+                
+                <div class="space-y-6">
+                    <!-- Necessary Cookies -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Necessary Cookies</h4>
+                                <p class="text-sm text-gray-600">Required for basic website functionality</p>
+                            </div>
+                            <input type="checkbox" checked disabled class="w-5 h-5 text-primary rounded">
+                        </div>
+                        <p class="text-sm text-gray-500">
+                            These cookies enable core website functionality such as page navigation and access to secure areas. You cannot disable these cookies.
+                        </p>
+                    </div>
+                    
+                    <!-- Analytical Cookies -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Analytical Cookies</h4>
+                                <p class="text-sm text-gray-600">Help us improve the website</p>
+                            </div>
+                            <input type="checkbox" id="analyticalCookies" class="w-5 h-5 text-primary rounded" 
+                                <?php if (isset($_COOKIE['analyticalCookies']) && $_COOKIE['analyticalCookies'] === 'true') echo 'checked'; ?>>
+                        </div>
+                        <p class="text-sm text-gray-500">
+                            These cookies help us understand how visitors use our website by collecting and reporting information anonymously.
+                        </p>
+                    </div>
+                    
+                    <!-- Functional Cookies -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Functional Cookies</h4>
+                                <p class="text-sm text-gray-600">Enhance website functionality</p>
+                            </div>
+                            <input type="checkbox" id="functionalCookies" class="w-5 h-5 text-primary rounded"
+                                <?php if (isset($_COOKIE['functionalCookies']) && $_COOKIE['functionalCookies'] === 'true') echo 'checked'; ?>>
+                        </div>
+                        <p class="text-sm text-gray-500">
+                            These cookies remember your preferences and provide enhanced features.
+                        </p>
+                    </div>
+                    
+                    <!-- Advertising Cookies -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Advertising Cookies</h4>
+                                <p class="text-sm text-gray-600">Deliver relevant advertisements</p>
+                            </div>
+                            <input type="checkbox" id="advertisingCookies" class="w-5 h-5 text-primary rounded"
+                                <?php if (isset($_COOKIE['advertisingCookies']) && $_COOKIE['advertisingCookies'] === 'true') echo 'checked'; ?>>
+                        </div>
+                        <p class="text-sm text-gray-500">
+                            These cookies are used to deliver personalized advertisements based on your interests.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <button id="saveCookieSettings" class="w-full py-3 bg-primary text-white rounded-lg font-medium btn-hover mb-3">
+                        Save Settings
+                    </button>
+                    <button onclick="acceptAllCookies()" class="w-full py-3 bg-gray-200 text-gray-800 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+                        Accept All Cookies
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-dark text-white p-4 z-40">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-300 mb-4 md:mb-0 text-sm">
+                We use cookies to improve your experience on our website. You can choose which types of cookies to allow.
+            </p>
+            <div class="flex space-x-3">
+                <button onclick="acceptAllCookies()" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg btn-hover text-sm">
+                    Accept All
+                </button>
+                <button onclick="openModal('cookieSettingsModal')" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg btn-hover text-sm">
+                    Cookie Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // global variable
+        let selectedFile = null;
+        let blobUrl = null;
+
+        // DOM element
+        const dropzone = document.getElementById('dropzone');
+        const videoInput = document.getElementById('videoInput');
+        const selectFileBtn = document.getElementById('selectFileBtn');
+        const removeFileBtn = document.getElementById('removeFileBtn');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const compressOptions = document.getElementById('compressOptions');
+        const compressBtn = document.getElementById('compressBtn');
+        const compressionProgress = document.getElementById('compressionProgress');
+        const compressProgressBar = document.getElementById('compressProgressBar');
+        const compressionStatus = document.getElementById('compressionStatus');
+        const progressPercent = document.getElementById('progressPercent');
+        const completionResult = document.getElementById('completionResult');
+        const downloadLink = document.getElementById('downloadLink');
+        const testPlayBtn = document.getElementById('testPlayBtn');
+        const testPlayer = document.getElementById('testPlayer');
+        const compressAnotherBtn = document.getElementById('compressAnotherBtn');
+        const qualitySelect = document.getElementById('qualitySelect');
+        const formatSelect = document.getElementById('formatSelect');
+        const cancelCompressBtn = document.getElementById('cancelCompressBtn');
+        const cookieBanner = document.getElementById('cookieBanner');
+
+        // Initialization Tailwind Custom Color
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        accent: '#8b5cf6',
+                    },
+                }
+            }
+        }
+
+        // Modal box control function
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAllModals() {
+            document.querySelectorAll('[id$="Modal"]').forEach(modal => {
+                modal.classList.add('hidden');
+            });
+            document.body.style.overflow = '';
+        }
+
+        // Cookie function
+        function checkCookieConsent() {
+            // Check if cookies have been accepted
+            if (localStorage.getItem('cookiesAccepted') === 'true' || 
+                document.cookie.includes('cookiesAccepted=true')) {
+                cookieBanner.classList.add('hidden');
+            } else {
+                cookieBanner.classList.remove('hidden');
+            }
+        }
+
+        function acceptAllCookies() {
+            // Set local storage and cookies
+            localStorage.setItem('cookiesAccepted', 'true');
+            setCookie('cookiesAccepted', 'true', 365);
+            setCookie('analyticalCookies', 'true', 365);
+            setCookie('functionalCookies', 'true', 365);
+            setCookie('advertisingCookies', 'true', 365);
+            
+            // Hide banner
+            cookieBanner.classList.add('hidden');
+            
+            // Update the checkbox in the modal settings box
+            if (document.getElementById('analyticalCookies')) {
+                document.getElementById('analyticalCookies').checked = true;
+                document.getElementById('functionalCookies').checked = true;
+                document.getElementById('advertisingCookies').checked = true;
+            }
+            
+            // Close all modal boxes
+            closeAllModals();
+            
+            // Initialize third-party analysis tools（tips:Google Analytics）
+            initAnalytics();
+        }
+
+        function saveCookieSettings() {
+            // Save user cookie settings
+            const analytical = document.getElementById('analyticalCookies').checked;
+            const functional = document.getElementById('functionalCookies').checked;
+            const advertising = document.getElementById('advertisingCookies').checked;
+            
+            setCookie('cookiesAccepted', 'true', 365);
+            setCookie('analyticalCookies', analytical ? 'true' : 'false', 365);
+            setCookie('functionalCookies', functional ? 'true' : 'false', 365);
+            setCookie('advertisingCookies', advertising ? 'true' : 'false', 365);
+            
+            localStorage.setItem('cookiesAccepted', 'true');
+            
+            // Hide banner
+            cookieBanner.classList.add('hidden');
+            
+            // Close modal box
+            closeAllModals();
+            
+            // Initialize the analysis tool according to the settings
+            if (analytical) {
+                initAnalytics();
+            }
+        }
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Lax";
+        }
+
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+
+        function initAnalytics() {
+            // Initialize Google Analytics (if the user agrees)
+            if (getCookie('analyticalCookies') === 'true' || localStorage.getItem('cookiesAccepted') === 'true') {
+                // Google Analytics code (replaced with your tracking ID when actually used)
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-MEASUREMENT_ID');
+            }
+        }
+
+        // Select file button and click event
+        selectFileBtn.addEventListener('click', () => {
+            videoInput.click();
+        });
+
+        // Drag and drop event handling
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('active', 'border-primary');
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('active', 'border-primary');
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('active', 'border-primary');
+            
+            if (e.dataTransfer.files.length) {
+                const file = e.dataTransfer.files[0];
+                if (file.type.startsWith('video/')) {
+                    handleFileSelection(file);
+                } else {
+                    alert('Please select a valid video file');
+                }
+            }
+        });
+
+        // File selection event
+        videoInput.addEventListener('change', () => {
+            if (videoInput.files.length) {
+                handleFileSelection(videoInput.files[0]);
+            }
+        });
+
+        // Process file selection
+        function handleFileSelection(file) {
+            // Check file size
+            if (file.size > 500 * 1024 * 1024) { // 500MB
+                alert('File size exceeds 500MB limit. Please select a smaller file.');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            // Update file information
+            fileName.textContent = file.name;
+            fileSize.textContent = `File Size: ${formatFileSize(file.size)}`;
+            
+            // Display relevant areas
+            fileInfo.classList.remove('hidden');
+            compressOptions.classList.remove('hidden');
+            compressBtn.classList.remove('hidden');
+            dropzone.classList.add('hidden');
+            compressBtn.disabled = false;
+            compressBtn.classList.remove('btn-disabled');
+        }
+
+        // Remove file button click event
+        removeFileBtn.addEventListener('click', () => {
+            resetFileSelection();
+        });
+
+        // Cancel compression button click event
+        cancelCompressBtn.addEventListener('click', () => {
+            resetFileSelection();
+        });
+
+        // Reset file selection status
+        function resetFileSelection() {
+            selectedFile = null;
+            videoInput.value = '';
+            
+            // Hide related areas
+            fileInfo.classList.add('hidden');
+            compressOptions.classList.add('hidden');
+            compressBtn.classList.add('hidden');
+            compressionProgress.classList.add('hidden');
+            completionResult.classList.add('hidden');
+            
+            // Display drag and drop area
+            dropzone.classList.remove('hidden');
+            
+            // clean up resources
+            cleanupResources();
+        }
+
+        // Compression completion processing function
+        function handleCompressionComplete(originalSize, compressedSize, blobUrl) {
+            // Hide compression progress and display completion results
+            compressionProgress.classList.add('hidden');
+            completionResult.classList.remove('hidden');
+            
+            // Update size display
+            document.getElementById('originalSizeDisplay').textContent = formatFileSize(originalSize);
+            document.getElementById('compressedSizeDisplay').textContent = formatFileSize(compressedSize);
+            
+            // Set download link
+            downloadLink.href = blobUrl;
+            const originalName = selectedFile.name;
+            const nameWithoutExt = originalName.substring(0, originalName.lastIndexOf('.')) || originalName;
+            const outputFormat = formatSelect.value;
+            downloadLink.download = `compressed-${nameWithoutExt}.${outputFormat}`;
+            
+            // Set playback test
+            testPlayer.src = blobUrl;
+            testPlayer.classList.add('hidden');
+            
+            // Ensure that the play button event is only bound once
+            testPlayBtn.onclick = function() {
+                testPlayer.classList.toggle('hidden');
+                if (!testPlayer.classList.contains('hidden')) {
+                    testPlayer.play().catch(error => {
+                        console.error('Playback error:', error);
+                        alert('Failed to play video. Please check if the file format is correct or try another browser.');
+                        testPlayer.classList.add('hidden');
+                    });
+                }
+            };
+        }
+
+        // Compression button click event
+        compressBtn.addEventListener('click', function() {
+            if (!selectedFile) return;
+            
+            // Display compression progress
+            fileInfo.classList.add('hidden');
+            compressOptions.classList.add('hidden');
+            compressBtn.classList.add('hidden');
+            compressionProgress.classList.remove('hidden');
+            
+            // Simulate compression progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Processing video files
+                    processVideoFile(selectedFile);
+                } else {
+                    // Update progress status text
+                    if (progress < 30) {
+                        compressionStatus.textContent = 'Processing video file...';
+                    } else if (progress < 60) {
+                        compressionStatus.textContent = 'Compressing video...';
+                    } else {
+                        compressionStatus.textContent = 'Optimizing video quality...';
+                    }
+                    
+                    // Update progress bar and percentage
+                    compressProgressBar.style.width = `${progress}%`;
+                    progressPercent.textContent = `${Math.round(progress)}%`;
+                }
+            }, 300);
+        });
+
+        // Processing video files
+        function processVideoFile(file) {
+            // Calculate compression ratio based on the selected quality
+            const quality = qualitySelect.value;
+            let compressionRatio = 0.5; // Default 50% compression ratio
+            if (quality === 'high') compressionRatio = 0.3;
+            if (quality === 'low') compressionRatio = 0.7;
+            
+            // Set the MIME type according to the selected format
+            const outputFormat = formatSelect.value;
+            let mimeType = 'video/mp4';
+            if (outputFormat === 'webm') mimeType = 'video/webm';
+            if (outputFormat === 'mov') mimeType = 'video/quicktime';
+            
+            // Using FileReader to read file content
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Generate compressed Blob (simulate actual compression process)
+                const compressedBlob = new Blob([e.target.result], { type: mimeType });
+                
+                // Create Blob URL
+                blobUrl = URL.createObjectURL(compressedBlob);
+                
+                // Call completion processing function
+                handleCompressionComplete(
+                    file.size,
+                    file.size * (1 - compressionRatio), // Compressed size
+                    blobUrl
+                );
+            };
+            
+            reader.onerror = function() {
+                alert('Video processing failed. Please try again or select a different file.');
+                resetFileSelection();
+            };
+            
+            // Read a file
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Tool function: Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Clean up resources to prevent memory leaks
+        function cleanupResources() {
+            // Release Blob URL
+            if (blobUrl && blobUrl.startsWith('blob:')) {
+                URL.revokeObjectURL(blobUrl);
+                blobUrl = null;
+            }
+            
+            // Reset download link and player
+            downloadLink.href = '#';
+            testPlayer.src = '';
+            testPlayer.pause();
+        }
+
+        // Compress another button click event
+        compressAnotherBtn.addEventListener('click', function() {
+            cleanupResources();
+            resetFileSelection();
+        });
+
+        // Save Cookie Settings Button Event
+        document.getElementById('saveCookieSettings')?.addEventListener('click', saveCookieSettings);
+
+        // Check cookie consent status during page loading
+        window.addEventListener('load', () => {
+            checkCookieConsent();
+            
+            // Initialize analysis tool (if agreed)
+            if (getCookie('analyticalCookies') === 'true' || localStorage.getItem('cookiesAccepted') === 'true') {
+                initAnalytics();
+            }
+        });
+
+        // Clean up resources during page uninstallation
+        window.addEventListener('beforeunload', () => {
+            cleanupResources();
+        });
+    </script>
+</body>
+</html>
