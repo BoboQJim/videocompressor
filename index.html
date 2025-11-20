@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="PLACEHOLDER_FOR_YOUR_VERIFICATION_CODE">
     <meta name="description" content="Compress video files online for free - No login required. Reduce video size without losing quality for web, social media, and more.">
-    <meta name="keywords" content="video compressor, compress video, reduce video size, online video compression, free video compressor">
+    <meta name="keywords" content="video compressor, compress video, reduce video size, online video compression, free video compressor, MP4, MOV, AVI, WMV, FLV, MKV">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Video Compress Pro">
+
+    <link rel="canonical" href="https://squoosh.online/" />
+    
+    <link rel="alternate" hreflang="en" href="https://squoosh.online/" />
+    <link rel="alternate" hreflang="x-default" href="https://squoosh.online/" />
+
     <meta property="og:title" content="Free Online Video Compressor - No Login Required">
     <meta property="og:description" content="Compress MP4, MOV, AVI and other video formats quickly. Reduce file size for easy sharing and storage.">
     <meta property="og:type" content="website">
@@ -17,6 +23,25 @@
     <meta name="twitter:title" content="Free Online Video Compressor - No Login Required">
     <meta name="twitter:description" content="Compress video files without losing quality. No registration needed.">
     <title>Free Online Video Compressor - Reduce Video Size Without Quality Loss</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "VideoCompress Pro - Free Online Video Compressor",
+      "description": "Reduce file size without losing quality. No login required. Supports MP4, MOV, AVI, and all major formats.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://squoosh.online",
+      "image": "https://squoosh.online/og-image.jpg"
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style type="text/tailwindcss">
@@ -47,7 +72,6 @@
      crossorigin="anonymous"></script>
 </head>
 <body class="font-inter bg-gray-50 text-dark min-h-screen flex flex-col">
-    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
@@ -76,10 +100,8 @@
                         Reduce file size without losing quality. No login required. Supports MP4, MOV, AVI, and all major formats.
                     </p>
                     
-                    <!-- Compression Tool (Central Focus) -->
                     <div class="relative mb-12 w-full max-w-3xl">
                         <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-                            <!-- Dropzone -->
                             <div id="dropzone" class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-primary transition-colors cursor-pointer mb-6">
                                 <input type="file" id="videoInput" accept="video/*" class="hidden">
                                 <i class="fa fa-cloud-upload text-4xl text-primary mb-4"></i>
@@ -93,7 +115,6 @@
                                 </div>
                             </div>
 
-                            <!-- File Information Area -->
                             <div id="fileInfo" class="hidden mb-6 p-4 border border-gray-200 rounded-lg">
                                 <div class="flex flex-col md:flex-row md:items-center justify-between">
                                     <div class="flex items-center mb-3 md:mb-0">
@@ -109,7 +130,6 @@
                                 </div>
                             </div>
 
-                            <!-- Compression Options Area -->
                             <div id="compressOptions" class="hidden mb-6">
                                 <h3 class="text-lg font-medium text-gray-700 mb-4">Compression Settings</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -132,12 +152,10 @@
                                 </div>
                             </div>
 
-                            <!-- Compression button -->
                             <button id="compressBtn" class="hidden w-full py-3 bg-primary text-white rounded-lg font-medium btn-hover mb-6">
                                 <i class="fa fa-compress mr-2"></i> Compress Video
                             </button>
 
-                            <!-- Compress progress area -->
                             <div id="compressionProgress" class="hidden mb-6">
                                 <div class="flex justify-between items-center mb-2">
                                     <p id="compressionStatus" class="text-gray-700">Processing video...</p>
@@ -153,7 +171,6 @@
                                 </div>
                             </div>
 
-                            <!-- Compressed completion result area -->
                             <div id="completionResult" class="hidden mt-6 text-center">
                                 <div class="mb-4">
                                     <i class="fa fa-check-circle text-4xl text-green-500 mb-3"></i>
@@ -170,32 +187,26 @@
                                     </div>
                                 </div>
 
-                                <!-- Download link -->
                                 <a id="downloadLink" href="#" class="inline-flex items-center justify-center w-full py-3 bg-secondary text-white rounded-lg btn-hover" download>
                                     <i class="fa fa-download mr-2"></i> Download Compressed Video
                                 </a>
                                 
-                                <!-- Play test button -->
                                 <button id="testPlayBtn" class="mt-3 w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 btn-hover">
                                     <i class="fa fa-play mr-1"></i> Test Playback
                                 </button>
                                 
-                                <!-- Hidden video player -->
                                 <video id="testPlayer" class="hidden mt-4 w-full rounded-lg" controls></video>
 
-                                <!-- Compress another button -->
                                 <button id="compressAnotherBtn" class="mt-4 w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 btn-hover">
                                     <i class="fa fa-refresh mr-1"></i> Compress Another Video
                                 </button>
                             </div>
                         </div>
                         
-                        <!-- Decorative Elements -->
                         <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary/10 rounded-full blur-xl hidden md:block"></div>
                         <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-accent/10 rounded-full blur-xl hidden md:block"></div>
                     </div>
                     
-                    <!-- Key Benefits (Simplified) -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 w-full max-w-2xl">
                         <div class="flex flex-col items-center text-center p-3">
                             <i class="fa fa-check-circle text-secondary text-xl mb-2"></i>
@@ -290,7 +301,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -320,7 +330,6 @@
         </div>
     </footer>
 
-    <!-- FAQ Modal -->
     <div id="faqModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b">
@@ -389,7 +398,6 @@
         </div>
     </div>
 
-    <!-- Privacy Modal -->
     <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b">
@@ -475,7 +483,7 @@
                     <li>The right to withdraw consent at any time (where processing is based on consent)</li>
                 </ul>
                 <p class="text-gray-700 mb-4">
-                    To exercise these rights, please contact us at support@videocompresspro.com. We will respond to your request within a reasonable timeframe.
+                    To exercise these rights, please contact us at support@squoosh.online. We will respond to your request within a reasonable timeframe.
                 </p>
                 
                 <h4 class="text-lg font-semibold mb-3">10. Changes to This Privacy Policy</h4>
@@ -488,7 +496,7 @@
                     If you have any questions about this Privacy Policy, please contact us at:
                 </p>
                 <p class="text-gray-700 mt-2">
-                    Email: support@videocompresspro.com<br>
+                    Email: support@squoosh.online<br>
                     Website: https://video.squoosh.online
                 </p>
                 
@@ -504,7 +512,6 @@
         </div>
     </div>
 
-    <!-- Terms of Service Modal -->
     <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b">
@@ -584,7 +591,7 @@
                     If you have any questions about these Terms of Service, please contact us at:
                 </p>
                 <p class="text-gray-700 mt-2">
-                    Email: support@videocompresspro.com<br>
+                    Email: support@squoosh.online<br>
                     Website: https://video.squoosh.online
                 </p>
                 
@@ -600,7 +607,6 @@
         </div>
     </div>
 
-    <!-- Cookie Policy Modal -->
     <div id="cookieModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b">
@@ -702,7 +708,6 @@
         </div>
     </div>
 
-    <!-- Cookie Settings Modal -->
     <div id="cookieSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b">
@@ -719,7 +724,6 @@
                 </p>
                 
                 <div class="space-y-6">
-                    <!-- Necessary Cookies -->
                     <div class="p-4 border border-gray-200 rounded-lg">
                         <div class="flex items-center justify-between mb-2">
                             <div>
@@ -733,7 +737,6 @@
                         </p>
                     </div>
                     
-                    <!-- Analytical Cookies -->
                     <div class="p-4 border border-gray-200 rounded-lg">
                         <div class="flex items-center justify-between mb-2">
                             <div>
@@ -748,7 +751,6 @@
                         </p>
                     </div>
                     
-                    <!-- Functional Cookies -->
                     <div class="p-4 border border-gray-200 rounded-lg">
                         <div class="flex items-center justify-between mb-2">
                             <div>
@@ -763,7 +765,6 @@
                         </p>
                     </div>
                     
-                    <!-- Advertising Cookies -->
                     <div class="p-4 border border-gray-200 rounded-lg">
                         <div class="flex items-center justify-between mb-2">
                             <div>
@@ -791,7 +792,6 @@
         </div>
     </div>
 
-    <!-- Cookie Consent Banner -->
     <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-dark text-white p-4 z-40">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <p class="text-gray-300 mb-4 md:mb-0 text-sm">
