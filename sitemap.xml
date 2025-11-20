@@ -3,7 +3,7 @@
     <!-- Main page -->
     <url>
         <loc>https://video.squoosh.online/</loc>
-        <lastmod>2025-11-12</lastmod>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -11,40 +11,9 @@
     <!-- Features section -->
     <url>
         <loc>https://video.squoosh.online/#features</loc>
-        <lastmod>2025-11-12</lastmod>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    
-    <!-- FAQ page (modal content) -->
-    <url>
-        <loc>https://video.squoosh.online/#faq</loc>
-        <lastmod>2025-11-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <!-- Privacy Policy -->
-    <url>
-        <loc>https://video.squoosh.online/#privacy</loc>
-        <lastmod>2025-11-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <!-- Terms of Service -->
-    <url>
-        <loc>https://video.squoosh.online/#terms</loc>
-        <lastmod>2025-11-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    
-    <!-- Cookie Policy -->
-    <url>
-        <loc>https://video.squoosh.online/#cookies</loc>
-        <lastmod>2025-11-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
+ 
 </urlset>
